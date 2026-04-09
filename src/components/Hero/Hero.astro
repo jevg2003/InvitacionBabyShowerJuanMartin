@@ -49,30 +49,31 @@
         </div>
     </div>
 
-    <div class="hero-image-wrapper relative max-w-4xl mx-auto mb-16 opacity-0">
+    <div class="hero-image-wrapper relative max-w-4xl mx-auto mb-16 opacity-0 px-4">
       <!-- Premium Panoramic Glass Frame -->
-      <div id="tilt-container" class="relative glass p-2 md:p-4 rounded-[3.5rem] shadow-2xl shadow-baby-green/30 group transition-all duration-700 hover:shadow-baby-green/40">
-        <div class="relative rounded-[2.8rem] overflow-hidden group aspect-[21/9] sm:aspect-auto">
+      <div id="tilt-container" class="relative glass p-2 md:p-4 rounded-[2.5rem] md:rounded-[3.5rem] shadow-2xl shadow-baby-green/30 group transition-all duration-700 hover:shadow-baby-green/40">
+        <div class="relative rounded-[1.8rem] md:rounded-[2.8rem] overflow-hidden group aspect-video sm:aspect-auto">
           <img 
             src="/hero.webp" 
             alt="Juan Martín Baby Shower" 
-            class="hero-img w-full h-auto transition-transform duration-1000 group-hover:scale-105"
+            class="hero-img w-full h-auto sm:h-auto object-cover sm:object-contain object-center transition-transform duration-1000 group-hover:scale-105 will-change-transform"
+            style="image-rendering: -webkit-optimize-contrast; image-rendering: auto;"
           />
           <div class="absolute inset-0 bg-gradient-to-t from-baby-green/10 to-transparent pointer-events-none"></div>
         </div>
         
-        <!-- Interactive Floating elements adapted for panorama -->
-        <div class="floating-icon absolute -top-10 -left-6 w-14 h-14 bg-white/80 backdrop-blur-md rounded-2xl flex items-center justify-center shadow-xl border border-white rotate-[-15deg] z-20 transition-all duration-500 group-hover:scale-110">
-            <span class="text-3xl">🧸</span>
+        <!-- Interactive Floating elements adapted for panorama & mobile -->
+        <div class="floating-icon absolute -top-6 -left-4 md:-top-10 md:-left-6 w-10 h-10 md:w-14 md:h-14 bg-white/80 backdrop-blur-md rounded-xl md:rounded-2xl flex items-center justify-center shadow-xl border border-white rotate-[-15deg] z-20 transition-all duration-500 group-hover:scale-110">
+            <span class="text-xl md:text-3xl">🧸</span>
         </div>
-        <div class="floating-icon absolute -bottom-10 -right-6 w-14 h-14 bg-white/80 backdrop-blur-md rounded-2xl flex items-center justify-center shadow-xl border border-white rotate-[15deg] z-20 transition-all duration-500 group-hover:scale-110">
-            <span class="text-3xl">✨</span>
+        <div class="floating-icon absolute -bottom-6 -right-4 md:-bottom-10 md:-right-6 w-10 h-10 md:w-14 md:h-14 bg-white/80 backdrop-blur-md rounded-xl md:rounded-2xl flex items-center justify-center shadow-xl border border-white rotate-[15deg] z-20 transition-all duration-500 group-hover:scale-110">
+            <span class="text-xl md:text-3xl">✨</span>
         </div>
       </div>
       
       <!-- Heart floating button-like element -->
-      <div class="absolute -top-12 -right-8 w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-2xl border-4 border-baby-green-light animate-float sm:flex hidden z-20">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-baby-green" fill="currentColor" viewBox="0 0 24 24">
+      <div class="absolute -top-10 -right-4 md:-top-12 md:-right-8 w-14 h-14 md:w-20 md:h-20 bg-white rounded-full flex items-center justify-center shadow-2xl border-4 border-baby-green-light animate-float sm:flex hidden z-20">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:h-10 md:w-10 text-baby-green" fill="currentColor" viewBox="0 0 24 24">
           <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
         </svg>
       </div>
