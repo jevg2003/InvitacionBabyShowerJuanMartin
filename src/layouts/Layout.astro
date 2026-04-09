@@ -7,8 +7,8 @@ interface Props {
 }
 
 const { 
-	title = "Invitación Baby Shower - Juan Martín",
-	description = "Acompáñanos a celebrar la pronta llegada de Juan Martín. Juan Pablo Plaza y Diana Velasquez te invitan."
+	title = "Invitación Baby Shower - Juan Martín | ¡Acompáñanos en este gran día!",
+	description = "Te invitamos cordialmente al Baby Shower de Juan Martín. Juan Pablo Plaza y Diana Velasquez te esperan para compartir esta alegría y amor."
 } = Astro.props;
 ---
 
@@ -24,9 +24,17 @@ const {
 		
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://invitacion-baby-shower-juan-martin.vercel.app/" />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
-		<meta property="og:image" content="/hero.png" />
+		<meta property="og:image" content="https://invitacion-baby-shower-juan-martin.vercel.app/hero.webp" />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content="https://invitacion-baby-shower-juan-martin.vercel.app/" />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+		<meta property="twitter:image" content="https://invitacion-baby-shower-juan-martin.vercel.app/hero.webp" />
 
 		<!-- Apple Touch Icon -->
 		<link rel="apple-touch-icon" href="/favicon.webp" />
