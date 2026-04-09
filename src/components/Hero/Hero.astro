@@ -1,0 +1,191 @@
+---
+---
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-transparent">
+  <!-- Decorative Parallax Elements -->
+  <div class="absolute inset-0 z-0 pointer-events-none">
+    <div class="parallax-element absolute top-10 left-10 w-32 h-32 bg-baby-green/20 rounded-full blur-3xl" data-speed="0.2"></div>
+    <div class="parallax-element absolute bottom-20 right-10 w-64 h-64 bg-white/40 rounded-full blur-3xl" data-speed="0.5"></div>
+    
+    <!-- Watercolor Blobs behind image -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl h-[600px] opacity-30 blur-[100px] z-0 pointer-events-none sm:block hidden">
+       <div class="absolute top-0 left-0 w-80 h-80 bg-baby-green rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
+       <div class="absolute top-0 right-0 w-80 h-80 bg-sage rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
+       <div class="absolute -bottom-8 left-20 w-80 h-80 bg-white rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000"></div>
+    </div>
+
+    <!-- Leaves -->
+    <div class="floating-leaf absolute top-[15%] right-[10%] w-12 h-12 opacity-20" data-speed="0.4">
+      <svg viewBox="0 0 24 24" fill="currentColor" class="text-baby-green-dark"><path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8.13,20C11,20 14,20 17,20C18.85,20 19.11,18.06 19.31,16.47C19.44,15.39 19.5,14.31 19.5,13.24C19.5,11.23 20,9 17,8M12,18C10,18 8.15,16.7 8.15,14.5C8.15,13.06 9.31,11.9 10.75,11.9C12.19,11.9 13.35,13.06 13.35,14.5C13.35,16.7 12,18 12,18Z"/></svg>
+    </div>
+    <div class="floating-leaf absolute bottom-[15%] left-[10%] w-16 h-16 opacity-10" data-speed="0.3">
+      <svg viewBox="0 0 24 24" fill="currentColor" class="text-baby-green-dark"><path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8.13,20C11,20 14,20 17,20C18.85,20 19.11,18.06 19.31,16.47C19.44,15.39 19.5,14.31 19.5,13.24C19.5,11.23 20,9 17,8M12,18C10,18 8.15,16.7 8.15,14.5C8.15,13.06 9.31,11.9 10.75,11.9C12.19,11.9 13.35,13.06 13.35,14.5C13.35,16.7 12,18 12,18Z"/></svg>
+    </div>
+  </div>
+
+  <div class="container mx-auto px-4 z-10 text-center">
+    <div class="hero-badge inline-block mb-8 opacity-0">
+      <span class="px-6 py-2 rounded-full bg-white/40 text-baby-green-dark text-xs font-bold tracking-[0.3em] uppercase border border-white/60 backdrop-blur-md shadow-sm">
+        Nuestra Familia Crece
+      </span>
+    </div>
+    
+    <div class="hero-intro mb-6 opacity-0 px-4">
+      <p class="font-accent text-4xl md:text-5xl text-baby-green-dark drop-shadow-sm py-4">Familia Plaza Velasquez</p>
+      <div class="flex items-center justify-center gap-4 mt-2">
+        <div class="h-[1px] w-8 bg-baby-green/40"></div>
+        <h2 class="font-heading text-xs font-bold text-slate-400 uppercase tracking-[0.4em]">Te invitan al</h2>
+        <div class="h-[1px] w-8 bg-baby-green/40"></div>
+      </div>
+    </div>
+
+    <div class="hero-title mb-12">
+        <h2 class="hero-subtitle font-accent text-5xl md:text-6xl text-baby-green-dark mb-4 opacity-0 leading-relaxed">
+            Baby Shower de
+        </h2>
+        <div class="text-reveal inline-block overflow-hidden pb-4">
+            <h1 class="hero-main-name font-heading text-6xl md:text-8xl font-bold text-slate-800 leading-none tracking-tight opacity-0">
+                Juan Martín
+            </h1>
+        </div>
+    </div>
+
+    <div class="hero-image-wrapper relative max-w-2xl mx-auto mb-16 opacity-0">
+      <!-- Premium Glass Frame -->
+      <div id="tilt-container" class="relative glass p-4 md:p-8 rounded-[3rem] shadow-2xl shadow-baby-green/30 group transition-all duration-700 hover:shadow-baby-green/40">
+        <div class="relative rounded-[2rem] overflow-hidden group">
+          <img 
+            src="/hero.png" 
+            alt="Juan Martín Baby Shower" 
+            class="hero-img w-full h-auto transition-transform duration-1000 group-hover:scale-105"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-baby-green/20 to-transparent pointer-events-none"></div>
+        </div>
+        
+        <!-- Interactive Floating elements attached to frame -->
+        <div class="floating-icon absolute -top-8 -left-8 w-16 h-16 bg-white/80 backdrop-blur-md rounded-2xl flex items-center justify-center shadow-xl border border-white rotate-[-12deg] z-20 transition-all duration-500 group-hover:scale-110">
+            <span class="text-3xl">🧸</span>
+        </div>
+        <div class="floating-icon absolute -bottom-8 -right-8 w-16 h-16 bg-white/80 backdrop-blur-md rounded-2xl flex items-center justify-center shadow-xl border border-white rotate-[12deg] z-20 transition-all duration-500 group-hover:scale-110">
+            <span class="text-3xl">✨</span>
+        </div>
+      </div>
+      
+      <!-- Heart floating button-like element -->
+      <div class="absolute -top-10 -right-10 w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-2xl border-4 border-baby-green-light animate-float sm:flex hidden z-20">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-baby-green" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+        </svg>
+      </div>
+    </div>
+
+    <div class="hero-footer flex flex-col items-center opacity-0 mt-8">
+      <div class="w-12 h-12 rounded-full border border-baby-green/30 flex items-center justify-center animate-bounce mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-baby-green-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
+      </div>
+      <p class="text-slate-400 text-[10px] font-bold tracking-[0.5em] uppercase">Desliza para los detalles</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+
+  window.addEventListener('load', () => {
+    const tl = gsap.timeline({ defaults: { ease: "power4.out" }});
+
+    tl.to(".hero-badge", { opacity: 1, y: 0, duration: 1, startAt: { y: -20 } })
+      .to(".hero-intro", { opacity: 1, y: 0, duration: 1, startAt: { y: 20 } }, "-=0.6")
+      .to(".hero-subtitle", { 
+        opacity: 1, 
+        y: 0, 
+        duration: 1.5, 
+        startAt: { y: 20 } 
+      }, "-=0.8")
+      .to(".hero-main-name", { 
+        opacity: 1, 
+        y: 0, 
+        duration: 1.5, 
+        startAt: { y: 60 } 
+      }, "-=1.2")
+      .to(".hero-image-wrapper", { 
+        opacity: 1, 
+        scale: 1, 
+        duration: 2, 
+        startAt: { scale: 0.8, opacity: 0 } 
+      }, "-=1.2")
+      .to(".hero-footer", { opacity: 1, duration: 1 }, "-=0.5");
+
+    // Interactive Tilt & Parallax
+    window.addEventListener("mousemove", (e) => {
+      const { clientX, clientY } = e;
+      const xPos = (clientX / window.innerWidth - 0.5) * 2;
+      const yPos = (clientY / window.innerHeight - 0.5) * 2;
+
+      // Tilt container effect
+      gsap.to("#tilt-container", {
+        rotationY: xPos * 10,
+        rotationX: -yPos * 10,
+        duration: 1,
+        ease: "power2.out",
+        transformPerspective: 1000
+      });
+
+      // Floating Icons
+      gsap.to(".floating-icon", {
+        x: xPos * 30,
+        y: yPos * 30,
+        rotation: (i) => (i % 2 === 0 ? 12 : -12) + xPos * 10,
+        duration: 1.5,
+        ease: "power2.out"
+      });
+
+      // Background Elements
+      gsap.to(".parallax-element", {
+        x: (i, target: any) => xPos * 50 * parseFloat(target.dataset.speed),
+        y: (i, target: any) => yPos * 50 * parseFloat(target.dataset.speed),
+        duration: 1,
+        ease: "power2.out"
+      });
+
+      gsap.to(".floating-leaf", {
+        x: (i, target: any) => xPos * 100 * parseFloat(target.dataset.speed),
+        y: (i, target: any) => yPos * 100 * parseFloat(target.dataset.speed),
+        rotation: xPos * 20,
+        duration: 1.5,
+        ease: "power2.out"
+      });
+    });
+  });
+</script>
+
+<style>
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+
+  @keyframes blob {
+    0% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+    100% { transform: translate(0, 0) scale(1); }
+  }
+
+  .animate-blob {
+    animation: blob 7s infinite;
+  }
+
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+</style>

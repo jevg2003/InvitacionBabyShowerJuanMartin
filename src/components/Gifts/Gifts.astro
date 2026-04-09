@@ -1,0 +1,236 @@
+---
+---
+<section id="regalos" class="py-32 bg-white relative overflow-hidden scroll-mt-20">
+  <div class="container mx-auto px-4 max-w-5xl relative z-10">
+    <div class="gifts-header text-center mb-16 opacity-0">
+      <h2 class="font-heading text-5xl font-black text-slate-800 mb-6 tracking-tight">Lista de Regalos</h2>
+      <p class="text-xl text-slate-500 max-w-2xl mx-auto leading-relaxed font-light">
+        Si deseas tener un detalle con <span class="text-baby-green-dark font-bold">Juan Martín</span>, hemos preparado una lista con cosas que le serán de mucha utilidad.
+      </p>
+    </div>
+
+    <!-- Symmetrical Masonry Grid (2 Flex Columns) -->
+    <div id="gifts-wrapper" class="flex flex-col md:flex-row gap-6 mb-16 opacity-0 items-start">
+      <div id="column-left" class="flex-1 w-full space-y-6">
+        <!-- Even items -->
+      </div>
+      <div id="column-right" class="flex-1 w-full space-y-6">
+        <!-- Odd items + Suggest action -->
+      </div>
+    </div>
+
+<!-- Decorative elements -->
+<div class="parallax-element pointer-events-none absolute top-1/4 -right-20 w-80 h-80 bg-baby-green/5 rounded-full blur-[80px]" data-speed="0.15"></div>
+<div class="parallax-element pointer-events-none absolute bottom-1/4 -left-20 w-80 h-80 bg-baby-green/5 rounded-full blur-[80px]" data-speed="0.1"></div>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { supabase } from "../../lib/supabase";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  let giftsData: any[] = [];
+  let currentExpandedId: string | null = null;
+
+  const columnLeft = document.getElementById('column-left');
+  const columnRight = document.getElementById('column-right');
+
+  async function fetchGifts() {
+    const { data, error } = await supabase
+      .from('gifts')
+      .select('*')
+      .order('created_at', { ascending: true });
+    
+    if (data) {
+      giftsData = data;
+      renderGifts();
+    }
+  }
+
+  function createGiftCard(gift: any) {
+    return `
+      <div id="gift-${gift.id}" class="gift-card group relative ${gift.is_reserved ? 'bg-slate-100 opacity-60 grayscale' : 'bg-baby-green-light/20'} border border-baby-green/10 p-6 md:p-8 rounded-[2.5rem] flex flex-col gap-6 hover:bg-white hover:shadow-2xl hover:shadow-baby-green/20 transition-all duration-500 overflow-hidden">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-6 relative z-10 w-full">
+            <div class="flex items-center gap-6 flex-1 min-w-0">
+                <div class="w-16 h-16 flex-shrink-0 ${gift.is_reserved ? 'bg-slate-200 text-slate-400' : 'bg-white text-baby-green'} rounded-2xl flex items-center justify-center shadow-sm transition-all duration-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                    </svg>
+                </div>
+                <div class="min-w-0 flex-1">
+                    <h4 class="font-heading text-xl font-bold text-slate-800 mb-1 truncate md:whitespace-normal">${gift.name}</h4>
+                    <p class="text-xs text-slate-400 font-bold uppercase tracking-[0.2em] truncate md:whitespace-normal">
+                        ${gift.is_reserved ? '¡Ya tiene dueño!' : 'Disponible para Juan Martín'}
+                    </p>
+                </div>
+            </div>
+            <div class="flex-shrink-0">
+            ${gift.is_reserved ? `
+                <div class="text-slate-400 font-bold text-sm uppercase tracking-widest bg-slate-200/50 px-4 py-2 rounded-xl">Apartado ❤️</div>
+            ` : `
+                <button class="reserve-trigger w-full sm:w-auto px-8 py-3 rounded-2xl bg-white text-baby-green-dark font-bold border border-baby-green/20 shadow-sm hover:bg-baby-green hover:text-white hover:border-baby-green transition-all duration-300 active:scale-95" data-id="${gift.id}">Reservar</button>
+            `}
+            </div>
+        </div>
+        <div class="inline-res-area max-h-0 opacity-0 overflow-hidden relative z-10" data-id="${gift.id}">
+            <div class="pt-6 border-t border-slate-100 mt-2">
+                <p class="text-slate-500 text-sm mb-4">¿Te gustaría regalar esto? Confirma tus datos:</p>
+                <form class="inline-reservation-form space-y-4" data-id="${gift.id}">
+                    <input type="text" required placeholder="Tu Nombre y Apellido" class="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-baby-green transition-all">
+                    <div class="flex gap-3">
+                        <button type="button" class="cancel-res flex-1 py-3 px-6 rounded-xl border border-slate-100 font-bold text-slate-400 hover:bg-slate-50 transition-all text-sm">Cancelar</button>
+                        <button type="submit" class="flex-1 py-3 px-6 rounded-xl bg-baby-green text-white font-bold shadow-lg shadow-baby-green/20 hover:bg-baby-green-dark transition-all text-sm">Confirmar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderGifts() {
+    if (!columnLeft || !columnRight) return;
+    
+    let leftHtml = "";
+    let rightHtml = "";
+
+    giftsData.forEach((gift, index) => {
+        if (index % 2 === 0) leftHtml += createGiftCard(gift);
+        else rightHtml += createGiftCard(gift);
+    });
+
+    // Suggest Gift action card
+    const suggestCard = `
+      <div id="add-gift-card" class="gift-card group relative bg-slate-50 border border-slate-100 p-6 md:p-8 rounded-[2.5rem] flex flex-col gap-6 hover:bg-white hover:shadow-2xl hover:shadow-slate-200 transition-all duration-500 overflow-hidden">
+        <div id="add-gift-intro" class="flex flex-col sm:flex-row sm:items-center justify-between gap-6 relative z-10 w-full transition-all duration-300">
+            <div class="flex items-center gap-6 flex-1">
+                <div class="w-16 h-16 bg-slate-200 text-slate-500 rounded-2xl flex items-center justify-center shadow-sm group-hover:bg-baby-green group-hover:text-white transition-all duration-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                </div>
+                <div>
+                    <h4 class="font-heading text-xl font-bold text-slate-800 mb-1">¿Tienes otra idea?</h4>
+                    <p class="text-xs text-slate-400 font-bold uppercase tracking-[0.2em]">Añade algo especial</p>
+                </div>
+            </div>
+            <button id="add-gift-trigger" class="w-full sm:w-auto px-8 py-3 rounded-2xl bg-white text-slate-500 font-bold border border-slate-200 shadow-sm hover:bg-baby-green hover:text-white hover:border-baby-green transition-all duration-300 active:scale-95">Sugerir</button>
+        </div>
+        <div id="add-gift-form-container" class="inline-res-area max-h-0 opacity-0 overflow-hidden relative z-10" data-id="add-gift">
+            <div class="pt-6 border-t border-slate-200 mt-2">
+                <p class="text-slate-500 text-sm mb-6 font-medium">Si quieres regalar algo que no está en la lista, regístralo aquí:</p>
+                <form id="add-gift-form" class="space-y-4">
+                    <input type="text" id="new-gift-name" required placeholder="¿Qué quieres regalar?" class="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-baby-green transition-all">
+                    <input type="text" id="new-gift-guest-name" required placeholder="Tu Nombre y Apellido" class="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-baby-green transition-all">
+                    <div class="flex gap-3">
+                      <button type="button" id="cancel-add-gift" class="flex-1 py-3 px-6 rounded-xl border border-slate-100 font-bold text-slate-400 hover:bg-slate-50 transition-all text-sm">Cancelar</button>
+                      <button type="submit" class="flex-1 py-3 px-6 rounded-xl bg-baby-green text-white font-bold shadow-lg shadow-baby-green/20 hover:bg-baby-green-dark transition-all text-sm">Sugerir y Reservar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+      </div>
+    `;
+
+    // Always put suggest card in the shorter column or just right column for consistency
+    if (giftsData.length % 2 === 0) leftHtml += suggestCard;
+    else rightHtml += suggestCard;
+
+    columnLeft.innerHTML = leftHtml;
+    columnRight.innerHTML = rightHtml;
+    attachListeners();
+  }
+
+  function collapseAll() {
+      document.querySelectorAll('.inline-res-area').forEach(el => {
+          if (el.classList.contains('active')) {
+            gsap.to(el, { maxHeight: 0, opacity: 0, duration: 0.4, ease: "power2.inOut" });
+            el.classList.remove('active');
+            if (el.id === 'add-gift-form-container') {
+                const addIntro = document.getElementById('add-gift-intro');
+                if (addIntro) gsap.to(addIntro, { opacity: 1, y: 0, duration: 0.3 });
+            }
+          }
+      });
+      currentExpandedId = null;
+  }
+
+  function attachListeners() {
+    // Make entire card clickable
+    document.querySelectorAll('.gift-card').forEach(card => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', (e) => {
+            const target = e.target as HTMLElement;
+            if (target.closest('button') || target.closest('input') || target.closest('form')) return;
+            
+            const trigger = card.querySelector('.reserve-trigger') as HTMLElement || card.querySelector('#add-gift-trigger') as HTMLElement;
+            if (trigger) trigger.click();
+        });
+    });
+
+    document.querySelectorAll('.reserve-trigger').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = (e.currentTarget as HTMLElement).dataset.id;
+        if (currentExpandedId === id) { collapseAll(); return; }
+        collapseAll();
+        currentExpandedId = id || null;
+        const area = document.querySelector(`.inline-res-area[data-id="${id}"]`) as HTMLElement;
+        if (area) {
+            area.classList.add('active');
+            gsap.to(area, { maxHeight: 400, opacity: 1, duration: 0.6, ease: "power2.out" });
+            setTimeout(() => area.scrollIntoView({ behavior: 'smooth', block: 'center' }), 300);
+        }
+      });
+    });
+
+    const addTrigger = document.getElementById('add-gift-trigger');
+    const addFormArea = document.getElementById('add-gift-form-container');
+    const addIntro = document.getElementById('add-gift-intro');
+    
+    addTrigger?.addEventListener('click', () => {
+        if (currentExpandedId === 'add-gift') { collapseAll(); return; }
+        collapseAll();
+        currentExpandedId = 'add-gift';
+        if (addFormArea) {
+            addFormArea.classList.add('active');
+            if (addIntro) gsap.to(addIntro, { opacity: 0, y: -20, duration: 0.3 });
+            gsap.to(addFormArea, { maxHeight: 600, opacity: 1, duration: 0.6, ease: "power2.out", delay: 0.1 });
+            setTimeout(() => addFormArea.scrollIntoView({ behavior: 'smooth', block: 'center' }), 300);
+        }
+    });
+
+    document.getElementById('cancel-add-gift')?.addEventListener('click', collapseAll);
+    document.querySelectorAll('.cancel-res').forEach(btn => btn.addEventListener('click', collapseAll));
+
+    document.querySelectorAll('.inline-reservation-form').forEach(form => {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const f = e.target as HTMLFormElement;
+            const id = f.dataset.id;
+            const name = (f.querySelector('input') as HTMLInputElement).value;
+            if (!name) return;
+            const { error } = await supabase.from('gifts').update({ is_reserved: true, reserved_by: name }).eq('id', id);
+            if (!error) collapseAll();
+        });
+    });
+
+    const addForm = document.getElementById('add-gift-form') as HTMLFormElement;
+    addForm?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const giftName = (document.getElementById('new-gift-name') as HTMLInputElement).value;
+        const guestName = (document.getElementById('new-gift-guest-name') as HTMLInputElement).value;
+        if (!giftName || !guestName) return;
+        const { error } = await supabase.from('gifts').insert([{ name: giftName, category: 'Especial', is_reserved: true, reserved_by: guestName }]);
+        if (!error) { collapseAll(); addForm.reset(); }
+    });
+  }
+
+  supabase.channel('public:gifts').on('postgres_changes', { event: '*', schema: 'public', table: 'gifts' }, () => fetchGifts()).subscribe();
+
+  window.addEventListener('load', () => {
+    fetchGifts();
+    gsap.to(".gifts-header", { opacity: 1, y: 0, duration: 1.2, startAt: { y: 30 }, scrollTrigger: { trigger: ".gifts-header", start: "top 85%" }});
+    gsap.to("#gifts-wrapper", { opacity: 1, y: 0, duration: 1.2, startAt: { y: 30 }, scrollTrigger: { trigger: "#gifts-wrapper", start: "top 85%" }});
+  });
+</script>

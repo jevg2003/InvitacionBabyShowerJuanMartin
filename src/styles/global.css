@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700&family=Pacifico&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-heading: "Outfit", sans-serif;
+  --font-accent: "Pacifico", cursive;
+  --font-body: "Inter", sans-serif;
+
+  --color-baby-green-light: #f0fdf4;
+  --color-baby-green: #4ade80;
+  --color-baby-green-dark: #166534;
+  --color-sage: #f7fee7;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: var(--font-body);
+    @apply bg-baby-green-light text-slate-800 antialiased;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-heading);
+  }
+
+  button {
+    cursor: pointer;
+  }
+}
