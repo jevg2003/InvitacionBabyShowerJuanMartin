@@ -82,11 +82,11 @@ const event = {
     gsap.to(".info-header", {
         opacity: 1,
         y: 0,
-        duration: 1.2,
+        duration: 0.8,
         startAt: { y: 30 },
         scrollTrigger: {
             trigger: ".info-header",
-            start: "top 90%"
+            start: "top 95%"
         }
     });
 
@@ -94,12 +94,12 @@ const event = {
       opacity: 1,
       y: 0,
       scale: 1,
-      stagger: 0.2,
-      duration: 1,
-      startAt: { y: 50, scale: 0.9, opacity: 0 },
+      stagger: 0.1,
+      duration: 0.7,
+      startAt: { y: 30, scale: 0.95, opacity: 0 },
       scrollTrigger: {
         trigger: ".info-grid",
-        start: "top 80%"
+        start: "top 90%"
       }
     });
   }

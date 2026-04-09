@@ -95,27 +95,27 @@
   window.addEventListener('load', () => {
     const tl = gsap.timeline({ defaults: { ease: "power4.out" }});
 
-    tl.to(".hero-badge", { opacity: 1, y: 0, duration: 1, startAt: { y: -20 } })
-      .to(".hero-intro", { opacity: 1, y: 0, duration: 1, startAt: { y: 20 } }, "-=0.6")
+    tl.to(".hero-badge", { opacity: 1, y: 0, duration: 0.8, startAt: { y: -20 } })
+      .to(".hero-intro", { opacity: 1, y: 0, duration: 0.8, startAt: { y: 20 } }, "-=0.5")
       .to(".hero-subtitle", { 
         opacity: 1, 
         y: 0, 
-        duration: 1.5, 
+        duration: 1, 
         startAt: { y: 20 } 
-      }, "-=0.8")
+      }, "-=0.6")
       .to(".hero-main-name", { 
         opacity: 1, 
         y: 0, 
-        duration: 1.5, 
+        duration: 1, 
         startAt: { y: 60 } 
-      }, "-=1.2")
+      }, "-=0.8")
       .to(".hero-image-wrapper", { 
         opacity: 1, 
         scale: 1, 
-        duration: 2, 
-        startAt: { scale: 0.8, opacity: 0 } 
-      }, "-=1.2")
-      .to(".hero-footer", { opacity: 1, duration: 1 }, "-=0.5");
+        duration: 1.2, 
+        startAt: { scale: 0.9, opacity: 0 } 
+      }, "-=0.8")
+      .to(".hero-footer", { opacity: 1, duration: 0.8 }, "-=0.4");
 
     // Interactive Tilt & Parallax
     window.addEventListener("mousemove", (e) => {

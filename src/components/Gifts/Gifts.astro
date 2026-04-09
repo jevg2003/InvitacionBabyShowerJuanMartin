@@ -145,7 +145,7 @@
   function collapseAll() {
       document.querySelectorAll('.inline-res-area').forEach(el => {
           if (el.classList.contains('active')) {
-            gsap.to(el, { maxHeight: 0, opacity: 0, duration: 0.4, ease: "power2.inOut" });
+            gsap.to(el, { maxHeight: 0, opacity: 0, duration: 0.3, ease: "power2.inOut" });
             el.classList.remove('active');
             if (el.id === 'add-gift-form-container') {
                 const addIntro = document.getElementById('add-gift-intro');
@@ -178,7 +178,7 @@
         const area = document.querySelector(`.inline-res-area[data-id="${id}"]`) as HTMLElement;
         if (area) {
             area.classList.add('active');
-            gsap.to(area, { maxHeight: 400, opacity: 1, duration: 0.6, ease: "power2.out" });
+            gsap.to(area, { maxHeight: 400, opacity: 1, duration: 0.4, ease: "power2.out" });
             setTimeout(() => area.scrollIntoView({ behavior: 'smooth', block: 'center' }), 300);
         }
       });
@@ -195,7 +195,7 @@
         if (addFormArea) {
             addFormArea.classList.add('active');
             if (addIntro) gsap.to(addIntro, { opacity: 0, y: -20, duration: 0.3 });
-            gsap.to(addFormArea, { maxHeight: 600, opacity: 1, duration: 0.6, ease: "power2.out", delay: 0.1 });
+            gsap.to(addFormArea, { maxHeight: 600, opacity: 1, duration: 0.4, ease: "power2.out", delay: 0.05 });
             setTimeout(() => addFormArea.scrollIntoView({ behavior: 'smooth', block: 'center' }), 300);
         }
     });
@@ -230,7 +230,7 @@
 
   window.addEventListener('load', () => {
     fetchGifts();
-    gsap.to(".gifts-header", { opacity: 1, y: 0, duration: 1.2, startAt: { y: 30 }, scrollTrigger: { trigger: ".gifts-header", start: "top 85%" }});
-    gsap.to("#gifts-wrapper", { opacity: 1, y: 0, duration: 1.2, startAt: { y: 30 }, scrollTrigger: { trigger: "#gifts-wrapper", start: "top 85%" }});
+    gsap.to(".gifts-header", { opacity: 1, y: 0, duration: 0.8, startAt: { y: 30 }, scrollTrigger: { trigger: ".gifts-header", start: "top 90%" }});
+    gsap.to("#gifts-wrapper", { opacity: 1, y: 0, duration: 0.8, startAt: { y: 30 }, scrollTrigger: { trigger: "#gifts-wrapper", start: "top 90%" }});
   });
 </script>
