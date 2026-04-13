@@ -4,7 +4,9 @@ const event = {
   time: "3:00 PM",
   location: "Barrio Santa Mónica Popular",
   address: "CRA 23 # 33e bis - 19",
-  mapsUrl: "https://www.google.com/maps/dir//3.4376422,-76.5100149/@3.4376245,-76.5100364,21z?entry=ttu&g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D"
+  lat: 3.4376422,
+  lng: -76.5100149,
+  label: "Baby Shower Juan Martín"
 };
 ---
 <section id="detalles" class="py-32 bg-baby-green-light relative overflow-hidden scroll-mt-20">
@@ -56,19 +58,75 @@ const event = {
         <h4 class="font-heading text-2xl font-bold text-slate-800 mb-3">Lugar</h4>
         <p class="text-slate-500 font-medium leading-relaxed mb-6">{event.location}<br/>{event.address}</p>
         
-        <a 
-          href={event.mapsUrl} 
-          target="_blank" 
-          rel="noopener noreferrer"
-          class="inline-flex items-center bg-baby-green-light text-baby-green-dark px-6 py-3 rounded-2xl font-bold shadow-sm hover:bg-baby-green hover:text-white transition-all duration-300"
+        <button 
+          id="open-map-btn"
+          data-lat={event.lat}
+          data-lng={event.lng}
+          data-label={event.label}
+          class="inline-flex items-center bg-baby-green-light text-baby-green-dark px-6 py-3 rounded-2xl font-bold shadow-sm hover:bg-baby-green hover:text-white transition-all duration-300 pointer-events-auto cursor-pointer"
         >
           Ver en Mapa
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
           </svg>
-        </a>
+        </button>
       </div>
     </div>
+  </div>
+
+  <!-- Map Selector Overlay -->
+  <div id="map-selector-overlay" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-[100] pointer-events-none opacity-0 transition-opacity duration-300"></div>
+  
+  <!-- Map Selector Action Sheet -->
+  <div id="map-selector-sheet" class="fixed bottom-0 left-0 w-full bg-white rounded-t-[3rem] z-[101] translate-y-full shadow-[0_-20px_80px_rgba(0,0,0,0.15)] p-8 md:p-12 transition-transform duration-500 max-w-xl mx-auto left-1/2 -translate-x-1/2">
+    <div class="w-16 h-1.5 bg-slate-100 rounded-full mx-auto mb-10"></div>
+    
+    <div class="text-center mb-10">
+      <h3 class="font-heading text-3xl font-black text-slate-800 mb-2">¿Cómo quieres llegar?</h3>
+      <p class="text-slate-400 font-medium italic">Selecciona tu aplicación favorita</p>
+    </div>
+    
+    <div class="grid grid-cols-1 gap-4 mb-8">
+      <button data-app="google" class="map-app-btn flex items-center justify-between p-6 rounded-[2rem] bg-slate-50 hover:bg-baby-green-light transition-all duration-300 group">
+        <div class="flex items-center gap-5">
+          <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm">
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=maps.google.com" alt="Google Maps" class="w-8 h-8" />
+          </div>
+          <span class="font-bold text-lg text-slate-700">Google Maps</span>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-300 group-hover:text-baby-green transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+
+      <button data-app="waze" class="map-app-btn flex items-center justify-between p-6 rounded-[2rem] bg-slate-50 hover:bg-baby-green-light transition-all duration-300 group">
+        <div class="flex items-center gap-5">
+          <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm">
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=waze.com" alt="Waze" class="w-8 h-8" />
+          </div>
+          <span class="font-bold text-lg text-slate-700">Waze</span>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-300 group-hover:text-baby-green transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+
+      <button data-app="apple" id="apple-maps-btn" class="map-app-btn hidden items-center justify-between p-6 rounded-[2rem] bg-slate-50 hover:bg-baby-green-light transition-all duration-300 group">
+        <div class="flex items-center gap-5">
+          <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm">
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=apple.com" alt="Apple Maps" class="w-8 h-8" />
+          </div>
+          <span class="font-bold text-lg text-slate-700">Apple Maps</span>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-300 group-hover:text-baby-green transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+    
+    <button id="close-map-selector" class="w-full py-5 text-slate-400 font-bold hover:text-red-400 transition-colors uppercase tracking-[0.2em] text-xs">
+      Cerrar
+    </button>
   </div>
 </section>
 
@@ -102,8 +160,74 @@ const event = {
         start: "top 95%"
       }
     });
+
+    // Map Selector Logic
+    const openBtn = document.getElementById('open-map-btn');
+    const overlay = document.getElementById('map-selector-overlay');
+    const sheet = document.getElementById('map-selector-sheet');
+    const closeBtn = document.getElementById('close-map-selector');
+    const appBtns = document.querySelectorAll('.map-app-btn');
+    const appleBtn = document.getElementById('apple-maps-btn');
+
+    // Detect iOS
+    const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    if (isIos && appleBtn) {
+      appleBtn.classList.remove('hidden');
+      appleBtn.classList.add('flex');
+    }
+
+    function showSelector() {
+      overlay.classList.remove('pointer-events-none');
+      gsap.to(overlay, { opacity: 1, duration: 0.4, ease: "power2.out" });
+      gsap.to(sheet, { y: 0, duration: 0.6, ease: "back.out(1.2)" });
+    }
+
+    function hideSelector() {
+      overlay.classList.add('pointer-events-none');
+      gsap.to(overlay, { opacity: 0, duration: 0.3, ease: "power2.in" });
+      gsap.to(sheet, { y: "100%", duration: 0.5, ease: "power2.in" });
+    }
+
+    function openMap(app) {
+      const lat = openBtn?.getAttribute('data-lat');
+      const lng = openBtn?.getAttribute('data-lng');
+      const label = openBtn?.getAttribute('data-label');
+      
+      let url = "";
+
+      switch(app) {
+        case 'google':
+          url = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+          break;
+        case 'waze':
+          url = `https://waze.com/ul?ll=${lat},${lng}&navigate=yes`;
+          break;
+        case 'apple':
+          url = `maps://maps.apple.com/?q=${encodeURIComponent(label || '')}&ll=${lat},${lng}`;
+          break;
+      }
+
+      if (url) {
+        window.open(url, '_blank');
+        hideSelector();
+      }
+    }
+
+    if (openBtn) openBtn.onclick = showSelector;
+    if (closeBtn) closeBtn.onclick = hideSelector;
+    if (overlay) overlay.onclick = hideSelector;
+
+    appBtns.forEach(btn => {
+      btn.onclick = () => openMap(btn.getAttribute('data-app'));
+    });
   }
 
-  window.addEventListener('load', initAnimations);
+  // Handle both standard load and Astro view transitions
+  if (document.readyState === 'loading') {
+    window.addEventListener('load', initAnimations);
+  } else {
+    initAnimations();
+  }
   document.addEventListener('astro:page-load', initAnimations);
 </script>
+
