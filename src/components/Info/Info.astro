@@ -72,63 +72,65 @@ const event = {
         </button>
       </div>
     </div>
-  </div>
-
-  <!-- Map Selector Overlay -->
-  <div id="map-selector-overlay" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-[100] pointer-events-none opacity-0 transition-opacity duration-300"></div>
-  
-  <!-- Map Selector Action Sheet -->
-  <div id="map-selector-sheet" class="fixed bottom-0 left-0 w-full bg-white rounded-t-[3rem] z-[101] translate-y-full shadow-[0_-20px_80px_rgba(0,0,0,0.15)] p-8 md:p-12 transition-transform duration-500 max-w-xl mx-auto left-1/2 -translate-x-1/2">
-    <div class="w-16 h-1.5 bg-slate-100 rounded-full mx-auto mb-10"></div>
-    
-    <div class="text-center mb-10">
-      <h3 class="font-heading text-3xl font-black text-slate-800 mb-2">¿Cómo quieres llegar?</h3>
-      <p class="text-slate-400 font-medium italic">Selecciona tu aplicación favorita</p>
     </div>
-    
-    <div class="grid grid-cols-1 gap-4 mb-8">
-      <button data-app="google" class="map-app-btn flex items-center justify-between p-6 rounded-[2rem] bg-slate-50 hover:bg-baby-green-light transition-all duration-300 group">
-        <div class="flex items-center gap-5">
-          <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm">
-            <img src="https://www.google.com/s2/favicons?sz=64&domain=maps.google.com" alt="Google Maps" class="w-8 h-8" />
-          </div>
-          <span class="font-bold text-lg text-slate-700">Google Maps</span>
-        </div>
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-300 group-hover:text-baby-green transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
-
-      <button data-app="waze" class="map-app-btn flex items-center justify-between p-6 rounded-[2rem] bg-slate-50 hover:bg-baby-green-light transition-all duration-300 group">
-        <div class="flex items-center gap-5">
-          <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm">
-            <img src="https://www.google.com/s2/favicons?sz=64&domain=waze.com" alt="Waze" class="w-8 h-8" />
-          </div>
-          <span class="font-bold text-lg text-slate-700">Waze</span>
-        </div>
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-300 group-hover:text-baby-green transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
-
-      <button data-app="apple" id="apple-maps-btn" class="map-app-btn hidden items-center justify-between p-6 rounded-[2rem] bg-slate-50 hover:bg-baby-green-light transition-all duration-300 group">
-        <div class="flex items-center gap-5">
-          <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm">
-            <img src="https://www.google.com/s2/favicons?sz=64&domain=apple.com" alt="Apple Maps" class="w-8 h-8" />
-          </div>
-          <span class="font-bold text-lg text-slate-700">Apple Maps</span>
-        </div>
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-300 group-hover:text-baby-green transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
-    </div>
-    
-    <button id="close-map-selector" class="w-full py-5 text-slate-400 font-bold hover:text-red-400 transition-colors uppercase tracking-[0.2em] text-xs">
-      Cerrar
-    </button>
   </div>
 </section>
+
+<!-- Map Selector Overlay -->
+<div id="map-selector-overlay" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-[100] pointer-events-none opacity-0"></div>
+
+<!-- Map Selector Action Sheet -->
+<div id="map-selector-sheet" class="fixed bottom-0 inset-x-0 mx-auto w-full max-w-lg bg-white rounded-t-[3rem] z-[101] shadow-[0_-20px_80px_rgba(0,0,0,0.15)] p-8 md:p-12 invisible">
+  <div class="w-16 h-1.5 bg-slate-100 rounded-full mx-auto mb-10"></div>
+  
+  <div class="text-center mb-10 text-pretty">
+    <h3 class="font-heading text-3xl font-black text-slate-800 mb-2">¿Cómo quieres llegar?</h3>
+    <p class="text-slate-400 font-medium italic px-4">Selecciona tu aplicación favorita para abrir la ubicación</p>
+  </div>
+  
+  <div class="grid grid-cols-1 gap-4 mb-8">
+    <button data-app="google" class="map-app-btn flex items-center justify-between p-6 rounded-[2rem] bg-slate-50 hover:bg-baby-green-light transition-all duration-300 group outline-none">
+      <div class="flex items-center gap-5">
+        <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm">
+          <img src="https://www.google.com/s2/favicons?sz=64&domain=maps.google.com" alt="Google Maps" class="w-8 h-8" />
+        </div>
+        <span class="font-bold text-lg text-slate-700">Google Maps</span>
+      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-300 group-hover:text-baby-green transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
+
+    <button data-app="waze" class="map-app-btn flex items-center justify-between p-6 rounded-[2rem] bg-slate-50 hover:bg-baby-green-light transition-all duration-300 group outline-none">
+      <div class="flex items-center gap-5">
+        <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm">
+          <img src="https://www.google.com/s2/favicons?sz=64&domain=waze.com" alt="Waze" class="w-8 h-8" />
+        </div>
+        <span class="font-bold text-lg text-slate-700">Waze</span>
+      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-300 group-hover:text-baby-green transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
+
+    <button data-app="apple" id="apple-maps-btn" class="map-app-btn hidden items-center justify-between p-6 rounded-[2rem] bg-slate-50 hover:bg-baby-green-light transition-all duration-300 group outline-none">
+      <div class="flex items-center gap-5">
+        <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm">
+          <img src="https://www.google.com/s2/favicons?sz=64&domain=apple.com" alt="Apple Maps" class="w-8 h-8" />
+        </div>
+        <span class="font-bold text-lg text-slate-700">Apple Maps</span>
+      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-300 group-hover:text-baby-green transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
+  </div>
+  
+  <button id="close-map-selector" class="w-full py-5 text-slate-400 font-bold hover:text-red-400 transition-colors uppercase tracking-[0.2em] text-xs outline-none">
+    Cerrar
+  </button>
+</div>
+
 
 <script>
   import { gsap } from "gsap";
@@ -169,6 +171,11 @@ const event = {
     const appBtns = document.querySelectorAll('.map-app-btn');
     const appleBtn = document.getElementById('apple-maps-btn');
 
+    if (!sheet) return;
+
+    // Initial state
+    gsap.set(sheet, { yPercent: 100, autoAlpha: 1, visibility: 'visible' });
+
     // Detect iOS
     const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     if (isIos && appleBtn) {
@@ -179,13 +186,15 @@ const event = {
     function showSelector() {
       overlay.classList.remove('pointer-events-none');
       gsap.to(overlay, { opacity: 1, duration: 0.4, ease: "power2.out" });
-      gsap.to(sheet, { y: 0, duration: 0.6, ease: "back.out(1.2)" });
+      gsap.to(sheet, { yPercent: 0, duration: 0.6, ease: "back.out(1.2)" });
+      document.body.style.overflow = 'hidden'; // Prevent scroll
     }
 
     function hideSelector() {
       overlay.classList.add('pointer-events-none');
       gsap.to(overlay, { opacity: 0, duration: 0.3, ease: "power2.in" });
-      gsap.to(sheet, { y: "100%", duration: 0.5, ease: "power2.in" });
+      gsap.to(sheet, { yPercent: 100, duration: 0.5, ease: "power2.in" });
+      document.body.style.overflow = ''; // Restore scroll
     }
 
     function openMap(app) {
