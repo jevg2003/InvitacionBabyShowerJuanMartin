@@ -5,7 +5,7 @@
     <div class="gifts-header text-center mb-16 opacity-0">
       <h2 class="font-heading text-5xl font-black text-slate-800 mb-6 tracking-tight">Lista de Regalos</h2>
       <p class="text-xl text-slate-500 max-w-2xl mx-auto leading-relaxed font-light">
-        Si deseas tener un detalle con <span class="text-baby-green-dark font-bold">Juan Martín</span>, hemos preparado una lista con cosas que le serán de mucha utilidad.
+        ¡Hicimos esta lista pensando en ustedes para hacerles la vida mucho más fácil! Queremos darles una pequeña guía por si desean tener un detallito con <span class="text-baby-green-dark font-bold">Juan Martín</span>. La idea es ayudarlos a elegir sin estrés, evitar que se repitan los regalos y asegurar que haya muchísima más variedad.
       </p>
     </div>
 
@@ -94,14 +94,6 @@
   function renderGifts() {
     if (!columnLeft || !columnRight) return;
     
-    let leftHtml = "";
-    let rightHtml = "";
-
-    giftsData.forEach((gift, index) => {
-        if (index % 2 === 0) leftHtml += createGiftCard(gift);
-        else rightHtml += createGiftCard(gift);
-    });
-
     // Suggest Gift action card
     const suggestCard = `
       <div id="add-gift-card" class="gift-card group relative bg-white border border-slate-200 p-6 md:p-8 rounded-[2.5rem] flex flex-col justify-start gap-6 hover:shadow-2xl hover:shadow-slate-200 transition-all duration-500 overflow-hidden">
@@ -135,9 +127,15 @@
       </div>
     `;
 
-    // Always put suggest card in the shorter column or just right column for consistency
-    if (giftsData.length % 2 === 0) leftHtml += suggestCard;
-    else rightHtml += suggestCard;
+    // Make the suggest card the very first thing in the left column
+    let leftHtml = suggestCard;
+    let rightHtml = "";
+
+    giftsData.forEach((gift, index) => {
+        // Because left already has 1 item, put the first mapped item in the right column to maintain balance
+        if (index % 2 === 0) rightHtml += createGiftCard(gift);
+        else leftHtml += createGiftCard(gift);
+    });
 
     columnLeft.innerHTML = leftHtml;
     columnRight.innerHTML = rightHtml;
@@ -149,10 +147,6 @@
           if (el.classList.contains('active')) {
             gsap.to(el, { maxHeight: 0, opacity: 0, duration: 0.3, ease: "power2.inOut" });
             el.classList.remove('active');
-            if (el.id === 'add-gift-form-container') {
-                const addIntro = document.getElementById('add-gift-intro');
-                if (addIntro) gsap.to(addIntro, { opacity: 1, y: 0, duration: 0.3 });
-            }
           }
       });
       currentExpandedId = null;
@@ -196,7 +190,6 @@
         currentExpandedId = 'add-gift';
         if (addFormArea) {
             addFormArea.classList.add('active');
-            if (addIntro) gsap.to(addIntro, { opacity: 0, y: -20, duration: 0.3 });
             gsap.to(addFormArea, { maxHeight: 600, opacity: 1, duration: 0.4, ease: "power2.out", delay: 0.05 });
             setTimeout(() => addFormArea.scrollIntoView({ behavior: 'smooth', block: 'center' }), 300);
         }
