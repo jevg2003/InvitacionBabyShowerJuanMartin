@@ -5,7 +5,7 @@
     <div class="gifts-header text-center mb-16 opacity-0">
       <h2 class="font-heading text-5xl font-black text-slate-800 mb-6 tracking-tight">Lista de Regalos</h2>
       <p class="text-xl text-slate-500 max-w-2xl mx-auto leading-relaxed font-light">
-        ¡Hicimos esta lista pensando en ustedes para hacerles la vida mucho más fácil! Queremos darles una pequeña guía por si desean tener un detallito con <span class="text-baby-green-dark font-bold">Juan Martín</span>. La idea es ayudarlos a elegir sin estrés, evitar que se repitan los regalos y asegurar que haya muchísima más variedad.
+        ¡Pensamos en ustedes! Creamos este espacio para que registren si desean tener un detallito con <span class="text-baby-green-dark font-bold">Juan Martín</span>. Se irá armando una lista compartida que nos ayudará a saber la variedad de regalos y evitará los repetidos.
       </p>
     </div>
 
@@ -77,7 +77,13 @@
         </div>
         <div class="inline-res-area max-h-0 opacity-0 overflow-hidden relative z-10" data-id="${gift.id}">
             <div class="pt-6 border-t border-slate-100 mt-2">
-                <p class="text-slate-500 text-sm mb-4">¿Te gustaría regalar esto? Confirma tus datos:</p>
+                <div class="mb-4">
+                    <p class="text-slate-500 text-sm mb-1">¿Te gustaría regalar esto? Confirma tus datos:</p>
+                    <p class="text-xs text-slate-400 italic flex items-center gap-1 opacity-80">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" /></svg>
+                        Tranquilo(a), tu nombre no será público. Es solo para llevar el control.
+                    </p>
+                </div>
                 <form class="inline-reservation-form space-y-4" data-id="${gift.id}">
                     <input type="text" required placeholder="Tu Nombre y Apellido" class="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-baby-green transition-all">
                     <div class="flex gap-3">
@@ -105,21 +111,27 @@
                     </svg>
                 </div>
                 <div class="min-h-[4.5rem] flex flex-col justify-start">
-                    <h4 class="font-heading text-xl font-bold text-slate-800 mb-1 leading-snug">¿Tienes otra idea?</h4>
-                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em] leading-tight mt-1">Añade algo especial</p>
+                    <h4 class="font-heading text-xl font-bold text-slate-800 mb-1 leading-snug">¿Qué te gustaría regalar?</h4>
+                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em] leading-tight mt-1">Registra tu detalle</p>
                 </div>
             </div>
-            <button id="add-gift-trigger" class="flex-shrink-0 w-full sm:w-auto px-8 py-3 rounded-2xl bg-slate-50 text-slate-500 font-bold border border-slate-200 shadow-sm hover:bg-baby-green hover:text-white hover:border-baby-green transition-all duration-300 active:scale-95">Sugerir</button>
+            <button id="add-gift-trigger" class="flex-shrink-0 w-full sm:w-auto px-8 py-3 rounded-2xl bg-slate-50 text-slate-500 font-bold border border-slate-200 shadow-sm hover:bg-baby-green hover:text-white hover:border-baby-green transition-all duration-300 active:scale-95">Registrar</button>
         </div>
         <div id="add-gift-form-container" class="inline-res-area max-h-0 opacity-0 overflow-hidden relative z-10" data-id="add-gift">
             <div class="pt-6 border-t border-slate-200 mt-2">
-                <p class="text-slate-500 text-sm mb-6 font-medium">Si quieres regalar algo que no está en la lista, regístralo aquí:</p>
+                <div class="mb-5">
+                    <p class="text-slate-500 text-sm mb-1 font-medium">Registra aquí el detalle que quieras obsequiar:</p>
+                    <p class="text-xs text-slate-400 italic flex items-center gap-1 opacity-80 font-normal">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" /></svg>
+                        Tranquilo(a), tu nombre no será público. Es solo para llevar el control.
+                    </p>
+                </div>
                 <form id="add-gift-form" class="space-y-4">
                     <input type="text" id="new-gift-name" required placeholder="¿Qué quieres regalar?" class="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-baby-green transition-all">
                     <input type="text" id="new-gift-guest-name" required placeholder="Tu Nombre y Apellido" class="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-baby-green transition-all">
                     <div class="flex gap-3">
                       <button type="button" id="cancel-add-gift" class="flex-1 py-3 px-6 rounded-xl border border-slate-100 font-bold text-slate-400 hover:bg-slate-50 transition-all text-sm">Cancelar</button>
-                      <button type="submit" class="flex-1 py-3 px-6 rounded-xl bg-baby-green text-white font-bold shadow-lg shadow-baby-green/20 hover:bg-baby-green-dark transition-all text-sm">Sugerir y Reservar</button>
+                      <button type="submit" class="flex-1 py-3 px-6 rounded-xl bg-baby-green text-white font-bold shadow-lg shadow-baby-green/20 hover:bg-baby-green-dark transition-all text-sm">Guardar Regalo</button>
                     </div>
                 </form>
             </div>
