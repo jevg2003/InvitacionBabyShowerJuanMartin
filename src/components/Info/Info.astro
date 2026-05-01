@@ -2,10 +2,10 @@
 const event = {
   date: "Domingo, 3 de Mayo",
   time: "3:00 PM",
-  location: "Barrio Santa Mónica Popular",
-  address: "CRA 23 # 33e bis - 19",
-  lat: 3.4376422,
-  lng: -76.5100149,
+  location: "Barrio 7 de Agosto",
+  address: "Diagonal 15 # 70-07",
+  lat: 3.4446654,
+  lng: -76.489601,
   label: "Baby Shower Juan Martín"
 };
 ---
@@ -177,31 +177,41 @@ const event = {
     gsap.set(sheet, { yPercent: 100, autoAlpha: 1, visibility: 'visible' });
 
     // Detect iOS
-    const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
     if (isIos && appleBtn) {
       appleBtn.classList.remove('hidden');
       appleBtn.classList.add('flex');
     }
 
     function showSelector() {
-      overlay.classList.remove('pointer-events-none');
-      gsap.to(overlay, { opacity: 1, duration: 0.4, ease: "power2.out" });
-      gsap.to(sheet, { yPercent: 0, duration: 0.6, ease: "back.out(1.2)" });
+      if (overlay) {
+        overlay.classList.remove('pointer-events-none');
+        gsap.to(overlay, { opacity: 1, duration: 0.4, ease: "power2.out" });
+      }
+      if (sheet) {
+        gsap.to(sheet, { yPercent: 0, duration: 0.6, ease: "back.out(1.2)" });
+      }
       document.body.style.overflow = 'hidden'; // Prevent scroll
     }
 
     function hideSelector() {
-      overlay.classList.add('pointer-events-none');
-      gsap.to(overlay, { opacity: 0, duration: 0.3, ease: "power2.in" });
-      gsap.to(sheet, { yPercent: 100, duration: 0.5, ease: "power2.in" });
+      if (overlay) {
+        overlay.classList.add('pointer-events-none');
+        gsap.to(overlay, { opacity: 0, duration: 0.3, ease: "power2.in" });
+      }
+      if (sheet) {
+        gsap.to(sheet, { yPercent: 100, duration: 0.5, ease: "power2.in" });
+      }
       document.body.style.overflow = ''; // Restore scroll
     }
 
-    function openMap(app) {
+    function openMap(app: string | null) {
       const lat = openBtn?.getAttribute('data-lat');
       const lng = openBtn?.getAttribute('data-lng');
       const label = openBtn?.getAttribute('data-label');
       
+      if (!lat || !lng) return;
+
       let url = "";
 
       switch(app) {
@@ -227,7 +237,7 @@ const event = {
     if (overlay) overlay.onclick = hideSelector;
 
     appBtns.forEach(btn => {
-      btn.onclick = () => openMap(btn.getAttribute('data-app'));
+      (btn as HTMLElement).onclick = () => openMap(btn.getAttribute('data-app'));
     });
   }
 
